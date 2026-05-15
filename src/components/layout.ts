@@ -61,7 +61,7 @@ export const Layout = (...children: any[]) =>
                                                            {
                                                                if (e.ctrlKey || e.metaKey || e.shiftKey || e.button !== 0) return;
                                                                docState.currentPath = item.path;
-                                                           }
+                                                           },
                                             })
                                         )
                                     )

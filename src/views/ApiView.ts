@@ -4,8 +4,8 @@ import { Layout } from '../components/layout';
 export const ApiView = () => Layout(
     Section({},
         H1({ textContent: '📚 API Reference' }),
-        
-        H2({ textContent: 'Core (atlas)' }),
+
+        H2({ textContent: 'Core (atlas-web)' }),
         Div({ className: 'api-item' },
             Code({ textContent: 'createState<T>(initialState: T): T' }),
             P({ textContent: 'Creates a deep reactive Proxy of the given object.' })
@@ -22,8 +22,8 @@ export const ApiView = () => Layout(
             Code({ textContent: 'createArchive<T extends object>(key: string, initialState: T): T' }),
             P({ textContent: 'Creates a reactive state that persists in localStorage.' })
         ),
-        
-        H2({ textContent: 'UI (atlas-dom)' }),
+
+        H2({ textContent: 'UI (atlas-web/dom)' }),
         Div({ className: 'api-item' },
             Code({ textContent: 'Fragment(tag: string, traits: Traits, ...children: Children[]): HTMLElement' }),
             P({ textContent: 'The foundational function for element creation.' })
@@ -53,7 +53,7 @@ export const ApiView = () => Layout(
             P({ textContent: 'Renders an Atlas element into a different part of the DOM.' })
         ),
 
-        H2({ textContent: 'Router (atlas-router)' }),
+        H2({ textContent: 'Router (atlas-web/router)' }),
         Div({ className: 'api-item' },
             Code({ textContent: 'new AtlasRouter({ rootId: string, routes: Route[] })' }),
             P({ textContent: 'Initializes the global router instance.' })

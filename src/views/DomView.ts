@@ -5,12 +5,12 @@ import {CodeBlock} from '../components/code-elements';
 export const DomView = () => Layout(
     Section({},
         H1({textContent: '🏗 Declarative UI (atlas-dom)'}),
-        P({textContent: 'The `atlas-dom` package provides a functional way to build the DOM. It replaces HTML templates with pure TypeScript functions.'}),
+        P({textContent: 'The `atlas-web/dom` package provides a functional way to build the DOM. It replaces HTML templates with pure TypeScript functions.'}),
 
         H2({textContent: 'Fragments'}),
         P({textContent: 'Every standard HTML tag has a corresponding capitalized fragment.'}),
         CodeBlock(`
-import { Div, H1, P, Button } from 'atlas/dom';
+import { Div, H1, P, Button } from 'atlas-web/dom';
 
 const Header = () => 
     Div({ className: 'header' },
@@ -36,7 +36,7 @@ Button({
         H2({ textContent: 'Scoped Styling' }),
         P({ textContent: 'Encapsulate component styles using `StyleMap`. It generates a unique scope ID and prefixes your selectors, ensuring styles never leak out.' }),
         CodeBlock(`
-import { StyleMap, Div } from 'atlas/dom';
+import { StyleMap, Div } from 'atlas-web/dom';
 
 const scope = StyleMap({
     'div': { padding: '20px', borderRadius: '8px' },
@@ -52,7 +52,7 @@ const Card = () => Div({ class: scope }, ...);
         H3({textContent: 'Loop'}),
         P({textContent: 'For efficient list rendering. It synchronizes an array of data with DOM elements, minimizing updates.'}),
         CodeBlock(`
-import { Loop, Li } from 'atlas/dom';
+import { Loop, Li } from 'atlas-web/dom';
 
 const List = (items: string[]) =>
     Ul({},
@@ -66,7 +66,7 @@ const List = (items: string[]) =>
         H3({textContent: 'Gate'}),
         P({textContent: 'For conditional rendering.'}),
         CodeBlock(`
-import { Gate, Span } from 'atlas/dom';
+import { Gate, Span } from 'atlas-web/dom';
 
 Gate({ 
     when: () => state.isLoading,
@@ -79,7 +79,7 @@ Gate({
         H3({textContent: 'Overlay'}),
         P({textContent: 'An overlay allows a component to station an element at a remote location in the DOM (usually the document body) while maintaining its logical connection to the parent.'}),
         CodeBlock(`
-import { Overlay, Div } from 'atlas/dom';
+import { Overlay, Div } from 'atlas-web/dom';
 
 // Teleport this div to the very end of the document
 Overlay(

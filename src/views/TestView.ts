@@ -1,5 +1,5 @@
-import {H1, Button, Div, Span, Overlay, StyleMap} from 'atlas-web/dom'
-import {createState, createFormula, createEffect, createArchive} from 'atlas-web'
+import {H1, Button, Div, Span, Overlay} from 'atlas-web/dom';
+import {createState, createFormula, createEffect, createArchive} from 'atlas-web';
 import {Layout} from "../components/layout.ts";
 
 export const TestView = () =>
@@ -44,10 +44,10 @@ export const TestView = () =>
                     textContent: "Increment",
                     onClick:     () =>
                                  {
-                                     state.count++
+                                     state.count++;
                                  },
                 })
             )
         )
-    )
-}
+    );
+};

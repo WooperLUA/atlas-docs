@@ -10,7 +10,7 @@ export const ReactivityView = () => Layout(
         H2({textContent: '1. createState'}),
         P({textContent: 'To create a reactive state, simply wrap any object with `createState`. This returns a proxy that tracks property access and updates.'}),
         CodeBlock(`
-import { createState } from 'atlas';
+import { createState } from 'atlas-web';
 
 const state = createState({
     count: 0,
@@ -21,7 +21,7 @@ const state = createState({
         H2({textContent: '2. createFormula'}),
         P({textContent: 'Formulas represent derived state. They are read-only calculations that stay in sync with their source data.'}),
         CodeBlock(`
-import { createFormula } from 'atlas';
+import { createFormula } from 'atlas-web';
 
 const countSquared = createFormula(() => state.count * state.count);
 
@@ -33,7 +33,7 @@ Span({ textContent: () => \`Squared: \${countSquared()}\` })
         H2({textContent: '3. createEffect'}),
         P({textContent: 'Effects are used for side-effects—actions that should happen when state changes but don\'t necessarily return a UI element (e.g., logging, API calls, or document titles).'}),
         CodeBlock(`
-import { createEffect } from 'atlas';
+import { createEffect } from 'atlas-web';
 
 // Explicitly watch the 'state' object
 createEffect(() => {
@@ -46,7 +46,7 @@ createEffect(() => {
         H2({textContent: '4. createArchive'}),
         P({textContent: 'An Archive is a reactive state that persists across sessions. It automatically syncs its data to localStorage whenever a property is updated.'}),
         CodeBlock(`
-import { createArchive } from 'atlas';
+import { createArchive } from 'atlas-web';
 
 // Loads existing data from 'user-prefs' or uses the default
 const settings = createArchive('user-prefs', {
@@ -60,7 +60,7 @@ settings.theme = 'light';
 
         H2({textContent: 'The Subscription Mechanism'}),
         P({},
-            'Atlas uses a "lazy subscription" model. When you pass a function to a trait in `atlas-dom`, Atlas executes it. If that function accesses any property of a reactive state, it is automatically subscribed to future changes.'
+            'Atlas uses a "lazy subscription" model. When you pass a function to a trait in `atlas-web/dom`, Atlas executes it. If that function accesses any property of a reactive state, it is automatically subscribed to future changes.'
         ),
         CodeBlock(`
 // Atlas detects state.count access via the arrow function

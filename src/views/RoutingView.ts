@@ -5,12 +5,12 @@ import { CodeBlock } from '../components/code-elements';
 export const RoutingView = () => Layout(
     Section({},
         H1({ textContent: '🚦 Routing (atlas-router)' }),
-        P({ textContent: '`atlas-router` is a lightweight client-side router designed to work seamlessly with Atlas components.' }),
-        
+        P({ textContent: '`atlas-web/router` is a lightweight client-side router designed to work seamlessly with Atlas components.' }),
+
         H2({ textContent: 'Configuration' }),
         P({ textContent: 'To initialize the router, provide a list of routes and the ID of the root element where views should be rendered.' }),
         CodeBlock(`
-import { AtlasRouter } from 'atlas/router';
+import { AtlasRouter } from 'atlas-web/router';
 
 const routes = [
     { path: '/', view: () => 'Home' },
@@ -23,7 +23,7 @@ new AtlasRouter({
     routes
 });
         `),
-        
+
         H2({ textContent: 'Features' }),
         Ul({},
             Li({}, Strong({ textContent: 'Automatic Interception:' }), ' The router intercepts all internal link clicks and prevents full page reloads.'),

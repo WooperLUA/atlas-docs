@@ -6,18 +6,18 @@ export const LifecycleView = () => Layout(
     Section({},
         H1({ textContent: '🔄 Component Lifecycle' }),
         P({ textContent: 'Atlas uses a MutationObserver to automatically detect when elements are added to or removed from the document, triggering lifecycle hooks defined in traits.' }),
-        
+
         H2({ textContent: 'Lifecycle Hooks' }),
         Ul({},
             Li({}, Strong({ textContent: 'onMount:' }), ' Called when the element is inserted into the DOM.'),
             Li({}, Strong({ textContent: 'onUnmount:' }), ' Called when the element is removed from the DOM.'),
             Li({}, Strong({ textContent: 'onUpdate:' }), ' Called whenever a reactive trait of the element is updated.')
         ),
-        
+
         H2({ textContent: 'Example' }),
         P({ textContent: 'Lifecycle hooks are useful for manual DOM manipulations, setting up third-party libraries, or cleanup.' }),
         CodeBlock(`
-import { Div } from 'atlas/dom';
+import { Div } from 'atlas-web/dom';
 
 const MyComponent = () =>
     Div({
