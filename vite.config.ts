@@ -1,7 +1,7 @@
 import {defineConfig} from "vite";
 
 export default defineConfig({
-    base: '/atlas-docs/',
+    base: '/',
     build: {
         // ... your existing build config
     }
