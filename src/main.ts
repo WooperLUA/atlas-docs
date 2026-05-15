@@ -10,6 +10,7 @@ import {TestView} from "./views/TestView";
 
 const routes = [
     { path: '/', view: IntroView },
+    { path: '/atlas-docs/', view: IntroView },
     { path: '/reactivity', view: ReactivityView },
     { path: '/dom', view: DomView },
     { path: '/routing', view: RoutingView },
