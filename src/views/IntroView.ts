@@ -3,7 +3,7 @@ import { Layout } from '../components/layout';
 
 export const IntroView = () => Layout(
     Section({},
-        H1({ textContent: '🌍 Atlas Framework' }),
+        H1({ textContent: '🌍 Atlas Web Framework' }),
         P({ textContent: 'Atlas is a lightweight, modular, and reactive TypeScript framework designed for building modern web applications with minimal overhead.' }),
         P({ textContent: 'The framework is divided into three specialized modules within the `atlas-web` package, allowing you to use only what you need.' }),
 
