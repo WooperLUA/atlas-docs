@@ -1,4 +1,4 @@
-import { AtlasRouter } from 'atlas/router';
+import { AtlasRouter } from 'atlas-web/router'
 import { IntroView } from './views/IntroView';
 import { ReactivityView } from './views/ReactivityView';
 import { DomView } from './views/DomView';

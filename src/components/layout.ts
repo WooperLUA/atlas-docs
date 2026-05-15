@@ -1,4 +1,4 @@
-import {Div, Nav, Ul, Li, A, Main, H2, Structure, P, Loop} from 'atlas/dom';
+import {Div, Nav, Ul, Li, A, Main, H2, Structure, P, Loop} from 'atlas-web/dom';
 import {docState} from '../state';
 
 export const Layout = (...children: any[]) =>

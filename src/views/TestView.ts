@@ -1,5 +1,5 @@
-import {H1, Button, Div, Span, Overlay, StyleMap} from 'atlas/dom'
-import {createState, createFormula, createEffect, createArchive} from 'atlas'
+import {H1, Button, Div, Span, Overlay, StyleMap} from 'atlas-web/dom'
+import {createState, createFormula, createEffect, createArchive} from 'atlas-web'
 import {Layout} from "../components/layout.ts";
 
 export const TestView = () =>

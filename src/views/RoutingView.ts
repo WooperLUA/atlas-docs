@@ -1,4 +1,4 @@
-import { Section, H1, P, H2, Ul, Li, Strong } from 'atlas/dom';
+import { Section, H1, P, H2, Ul, Li, Strong } from 'atlas-web/dom';
 import { Layout } from '../components/layout';
 import { CodeBlock } from '../components/code-elements';
 

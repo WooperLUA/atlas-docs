@@ -1,4 +1,4 @@
-import { Pre, Code } from 'atlas/dom';
+import { Pre, Code } from 'atlas-web/dom';
 
 declare const hljs: any;
 

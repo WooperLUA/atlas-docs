@@ -1,4 +1,4 @@
-import { Section, H1 } from 'atlas/dom';
+import { Section, H1 } from 'atlas-web/dom';
 import { Layout } from '../components/layout';
 
 export const ErrorView = () => Layout(

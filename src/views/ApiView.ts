@@ -1,4 +1,4 @@
-import { Section, H1, Div, Code, P, H2 } from 'atlas/dom';
+import { Section, H1, Div, Code, P, H2 } from 'atlas-web/dom';
 import { Layout } from '../components/layout';
 
 export const ApiView = () => Layout(
