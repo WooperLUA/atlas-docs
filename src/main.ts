@@ -22,5 +22,6 @@ const routes = [
 
 new AtlasRouter({
     rootId: 'app',
-    routes
+    routes,
+    basePath : '/atlas-docs'
 });
