@@ -5,9 +5,9 @@ export const IntroView = () => Layout(
     Section({},
         H1({ textContent: '🌍 Atlas Web Framework' }),
         P({ textContent: 'Atlas is a lightweight, modular, and reactive TypeScript framework designed for building modern web applications with minimal overhead.' }),
-        P({ textContent: 'The framework is divided into three specialized modules within the `atlas-web` package, allowing you to use only what you need.' }),
+        P({ textContent: 'The framework is divided into four specialized modules within the `atlas-web` package, allowing you to use only what you need.' }),
 
-        H2({ textContent: '📦 Three Pillars' }),
+        H2({ textContent: '📦 Four Pillars' }),
         Div({ className: 'feature-grid' },
             Div({ className: 'feature-card' },
                 H3({ textContent: 'atlas-web' }),
@@ -20,6 +20,10 @@ export const IntroView = () => Layout(
             Div({ className: 'feature-card' },
                 H3({ textContent: 'atlas-web/router' }),
                 P({ textContent: 'A lightweight client-side router with support for dynamic paths, parameters, and global navigation interception.' })
+            ),
+            Div({ className: 'feature-card' },
+                H3({ textContent: 'atlas-web/query' }),
+                P({ textContent: 'A powerful data-fetching and caching utility. It manages remote resource states, revalidation, and loading/error states seamlessly.' })
             )
         ),
 

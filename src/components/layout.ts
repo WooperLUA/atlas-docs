@@ -24,6 +24,12 @@ export const Layout = (...children: any[]) =>
             ]
         },
         {
+            title: 'Query (atlas-web/query)',
+            items: [
+                {path: '/query', text: 'Query'},
+            ]
+        },
+        {
             title: 'Reference',
             items: [
                 {path: '/api', text: 'API Reference'}

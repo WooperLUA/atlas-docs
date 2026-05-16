@@ -1,5 +1,6 @@
-import {H1, Button, Div, Span, Overlay} from 'atlas-web/dom';
+import {H1, H2, P, Ul,Loop, Li, Button, Div, Span, Overlay, Gate} from 'atlas-web/dom';
 import {createState, createFormula, createEffect, createArchive} from 'atlas-web';
+import {createFetch} from 'atlas-web/query'
 import {Layout} from "../components/layout.ts";
 
 export const TestView = () =>
@@ -14,6 +15,9 @@ export const TestView = () =>
         theme:         'dark',
         notifications: true
     });
+
+    const {state: userState, refresh : refreshUser} = createFetch('https://api.github.com/users/WooperLUA')
+
 
     createEffect(() =>
     {
@@ -48,6 +52,29 @@ export const TestView = () =>
                                  },
                 })
             )
+        ),
+        Div({},
+            H2({textContent: 'Github Fetch'}),
+
+            Gate({
+                    when: () => !userState.loading,
+                    fallback: P({textContent: 'Loading github profile...'})
+                },
+                Ul({style: 'list-style: none; padding: 0;'},
+                    Loop({
+                        each: () => userState.data ? Object.entries(userState.data) : [],
+                        render: ([key, value]) => Li({
+                            innerHTML: `<strong>${key}:</strong> ${value}`
+                        })
+                    })
+                )
+            ),
+
+            Button({
+                style: 'margin-top: 1rem; padding: 0.5rem 1rem; cursor: pointer;',
+                textContent: 'Refresh Profile',
+                onClick: () => refreshUser()
+            })
         )
-    );
+    )
 };
