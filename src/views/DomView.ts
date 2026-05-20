@@ -64,16 +64,20 @@ const List = (items: string[]) =>
         `),
 
         H3({textContent: 'Gate'}),
-        P({textContent: 'For conditional rendering.'}),
+        P({textContent: 'For sleek conditional rendering. Pass a reactive condition function as the first argument, followed directly by the elements to display.'}),
         CodeBlock(`
 import { Gate, Span } from 'atlas-web/dom';
 
-Gate({ 
-    when: () => state.isLoading,
-    fallback: Span({ textContent: 'Content Loaded!' })
-}, 
-    Span({ textContent: 'Loading...' })
-)
+// Renders only when loading condition is met
+Gate(() => state.isLoading,
+    Span({ textContent: 'Loading core modules...' })
+);
+
+// Easily compose distinct true/false UI configurations
+Structure(
+    Gate(() => state.isLoggedIn, ProfileView()),
+    Gate(() => !state.isLoggedIn, LoginPrompt())
+);
         `),
 
         H3({textContent: 'Overlay'}),

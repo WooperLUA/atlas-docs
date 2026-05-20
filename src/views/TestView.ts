@@ -1,4 +1,4 @@
-import {H1, H2, P, Ul,Loop, Li, Button, Div, Span, Overlay, Gate} from 'atlas-web/dom';
+import {H1, H2, P, Ul, Loop, Li, Button, Div, Span, Overlay, Gate} from 'atlas-web/dom';
 import {createState, createFormula, createEffect, createArchive} from 'atlas-web';
 import {createFetch} from 'atlas-web/query'
 import {Layout} from "../components/layout.ts";
@@ -18,12 +18,12 @@ export const TestView = () =>
 
     const {state: userState, refresh : refreshUser} = createFetch('https://api.github.com/users/WooperLUA')
 
-
+    // Cleaned up effect - dropped the dependency tracking array
     createEffect(() =>
     {
         console.log(`Log: Count is ${state.count}, Squared is ${countSquared()}`);
         document.title = `Atlas: ${state.count}`;
-    }, [state]);
+    });
 
     return Layout(
         Overlay(H1({textContent: 'Hello, World!'}), document.body),
@@ -56,10 +56,11 @@ export const TestView = () =>
         Div({},
             H2({textContent: 'Github Fetch'}),
 
-            Gate({
-                    when: () => !userState.loading,
-                    fallback: P({textContent: 'Loading github profile...'})
-                },
+            // Cleaned up Gate to match the new crisp syntax style
+            Gate(() => userState.loading,
+                P({textContent: 'Loading github profile...'})
+            ),
+            Gate(() => !userState.loading,
                 Ul({style: 'list-style: none; padding: 0;'},
                     Loop({
                         each: () => userState.data ? Object.entries(userState.data) : [],

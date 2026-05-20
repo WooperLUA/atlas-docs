@@ -15,8 +15,8 @@ export const ApiView = () => Layout(
             P({textContent: 'Creates a derived, read-only reactive value.'})
         ),
         Div({className: 'api-item'},
-            Code({textContent: 'createEffect(effect: () => void, deps: any[]): void'}),
-            P({textContent: 'Creates a persistent side-effect that re-runs whenever its state dependencies change.'})
+            Code({textContent: 'createEffect(effect: () => void): void'}),
+            P({textContent: 'Creates a persistent side-effect that automatically registers its state dependencies during execution.'})
         ),
         Div({className: 'api-item'},
             Code({textContent: 'createArchive<T extends object>(key: string, initialState: T): T'}),
@@ -41,8 +41,8 @@ export const ApiView = () => Layout(
             P({textContent: 'A component for efficient list synchronization.'})
         ),
         Div({className: 'api-item'},
-            Code({textContent: 'Gate({ when: () => boolean, fallback?: Children }, ...children: Children[]): DocumentFragment'}),
-            P({textContent: 'A component for reactive conditional rendering.'})
+            Code({textContent: 'Gate(when: () => boolean, ...children: Children[]): DocumentFragment'}),
+            P({textContent: 'A zero-config component for reactive conditional rendering.'})
         ),
         Div({className: 'api-item'},
             Code({textContent: 'Structure(...children: Children[]): DocumentFragment'}),
