@@ -34,65 +34,59 @@ Button({
         `),
 
         H2({ textContent: 'Scoped Styling' }),
-        P({ textContent: 'Encapsulate component styles using `StyleMap`. It generates a unique scope ID and prefixes your selectors, ensuring styles never leak out.' }),
+        P({ textContent: 'Encapsulate component styles using `createStyleMap`. It generates a unique scope ID and prefixes your selectors, ensuring styles never leak out.' }),
         CodeBlock(`
-import { StyleMap, Div } from 'atlas-web/dom';
+import { createStyleMap, Div } from 'atlas-web/dom';
 
-const scope = StyleMap({
+const scope = createStyleMap({
     'div': { padding: '20px', borderRadius: '8px' },
     'h1': { color: '#58f3e5' }
 });
 
-const Card = () => Div({ class: scope }, ...);
+const Card = () => Div({ class: scope });
         `),
 
         H2({textContent: 'Structural Components'}),
         P({textContent: 'Atlas provides specialized components for common logic.'}),
 
-        H3({textContent: 'Loop'}),
+        H3({textContent: '_Loop'}),
         P({textContent: 'For efficient list rendering. It synchronizes an array of data with DOM elements, minimizing updates.'}),
         CodeBlock(`
-import { Loop, Li } from 'atlas-web/dom';
+import { _Loop, Ul, Li } from 'atlas-web/dom';
 
 const List = (items: string[]) =>
     Ul({},
-        Loop({
-            each: () => items,
-            render: (item) => Li({ textContent: item })
-        })
+        _Loop(() => items, (item) => Li({ textContent: item }))
     );
         `),
 
-        H3({textContent: 'Gate'}),
+        H3({textContent: '_If'}),
         P({textContent: 'For sleek conditional rendering. Pass a reactive condition function as the first argument, followed directly by the elements to display.'}),
         CodeBlock(`
-import { Gate, Span } from 'atlas-web/dom';
+import { _If, Span, _Structure } from 'atlas-web/dom';
 
-// Renders only when loading condition is met
-Gate(() => state.isLoading,
+_If(() => state.isLoading,
     Span({ textContent: 'Loading core modules...' })
 );
 
-// Easily compose distinct true/false UI configurations
-Structure(
-    Gate(() => state.isLoggedIn, ProfileView()),
-    Gate(() => !state.isLoggedIn, LoginPrompt())
+_Structure(
+    _If(() => state.isLoggedIn, ProfileView()),
+    _If(() => !state.isLoggedIn, LoginPrompt())
 );
         `),
 
-        H3({textContent: 'Overlay'}),
-        P({textContent: 'An overlay allows a component to station an element at a remote location in the DOM (usually the document body) while maintaining its logical connection to the parent.'}),
+        H3({textContent: '_Portal'}),
+        P({textContent: 'A portal allows a component to station an element at a remote location in the DOM (usually the document body) while maintaining its logical connection to the parent.'}),
         CodeBlock(`
-import { Overlay, Div } from 'atlas-web/dom';
+import { _Portal, Div } from 'atlas-web/dom';
 
-// Teleport this div to the very end of the document
-Overlay(
-    Div({ class: 'tooltip' }, 'Stationed at the root'),
+_Portal(
+    Div({ class: 'tooltip' }, 'Stationed at the root'), 
     document.body
 );
         `),
 
-        H3({textContent: 'Structure'}),
+        H3({textContent: '_Structure'}),
         P({textContent: 'A component that returns a `DocumentFragment`. Useful for grouping elements without adding a wrapper `div` to the DOM.'})
     )
 );

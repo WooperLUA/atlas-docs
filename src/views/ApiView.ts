@@ -25,7 +25,7 @@ export const ApiView = () => Layout(
 
         H2({textContent: 'UI (atlas-web/dom)'}),
         Div({className: 'api-item'},
-            Code({textContent: 'Fragment(tag: string, traits: Traits, ...children: Children[]): HTMLElement'}),
+            Code({textContent: 'Fragment(tag: string, traits: Traits, ...children: Children[]): AtlasNode<any>'}),
             P({textContent: 'The foundational function for element creation.'})
         ),
         Div({className: 'api-item'},
@@ -33,23 +33,23 @@ export const ApiView = () => Layout(
             P({textContent: 'Capitalized shorthand functions for all standard HTML tags.'})
         ),
         Div({className: 'api-item'},
-            Code({textContent: 'StyleMap(css: Record<string, AtlasCSS>): string'}),
+            Code({textContent: 'createStyleMap(css: Record<string, AtlasCSS>): string'}),
             P({textContent: 'Generates a unique scope ID and injects prefixed CSS rules into the document head.'})
         ),
         Div({className: 'api-item'},
-            Code({textContent: 'Loop<T>({ each: () => T[], render: (item: T, index: number) => Children }): DocumentFragment'}),
+            Code({textContent: '_Loop<T>(each: () => T[], render: (item: T, index: number) => Children): DocumentFragment'}),
             P({textContent: 'A component for efficient list synchronization.'})
         ),
         Div({className: 'api-item'},
-            Code({textContent: 'Gate(when: () => boolean, ...children: Children[]): DocumentFragment'}),
+            Code({textContent: '_If(when: () => boolean, ...children: Children[]): DocumentFragment'}),
             P({textContent: 'A zero-config component for reactive conditional rendering.'})
         ),
         Div({className: 'api-item'},
-            Code({textContent: 'Structure(...children: Children[]): DocumentFragment'}),
+            Code({textContent: '_Structure(...children: Children[]): DocumentFragment'}),
             P({textContent: 'Groups multiple children into a DocumentFragment.'})
         ),
         Div({className: 'api-item'},
-            Code({textContent: 'Overlay(element: HTMLElement, target: HTMLElement = document.body): Comment'}),
+            Code({textContent: '_Portal(element: AtlasNode<any>, target: HTMLElement | string = document.body): Comment'}),
             P({textContent: 'Renders an Atlas element into a different part of the DOM.'})
         ),
 
@@ -59,7 +59,7 @@ export const ApiView = () => Layout(
             P({textContent: 'Initializes the global router instance.'})
         ),
 
-        H2({textContent: 'Fetch (atlas-web/fetch)'}),
+        H2({textContent: 'Query (atlas-web/query)'}),
         Div({className: 'api-item'},
             Code({textContent: 'createFetch<T>(input, options?): { state, refresh }'}),
             P({textContent: 'Reactive wrapper for Fetch API that manages async states (loading, data, error).'})
