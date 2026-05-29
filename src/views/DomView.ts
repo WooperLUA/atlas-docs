@@ -87,6 +87,16 @@ _Portal(
         `),
 
         H3({textContent: '_Structure'}),
-        P({textContent: 'A component that returns a `DocumentFragment`. Useful for grouping elements without adding a wrapper `div` to the DOM.'})
+        P({textContent: 'A component that returns a `DocumentFragment`. Useful for grouping elements without adding a wrapper `div` to the DOM.'}),
+        CodeBlock(`
+        import { _Structure } from 'atlas-web/dom';
+        
+        // Wraps the two components together but wont make it div wrapped
+        _Structure(
+            MyComponent(),
+            MyOtherComponent(),
+        );
+        `),
+
     )
 );

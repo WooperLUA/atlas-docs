@@ -54,6 +54,33 @@ const settings = createArchive('user-prefs', {
 settings.theme = 'light';
         `),
 
+        H2({textContent: '5. Global State (Flows)'}),
+        P({textContent: 'For state that needs to be accessed across completely different parts of your application, Atlas provides a global registry via Flows.'}),
+        CodeBlock(`
+import { createFlow, getFlow } from 'atlas-web';
+
+// Initialize it once (e.g., in your main setup)
+createFlow('auth', { user: null, isAuthenticated: false });
+
+// Access it anywhere else in your app
+const authState = getFlow('auth');
+P({ textContent: () => authState.isAuthenticated ? 'Welcome back!' : 'Please log in.' })
+`),
+        H2({textContent: '6. Destructuring (getRefs)'}),
+        P({textContent: 'Standard destructuring breaks Proxy reactivity. Use `getRefs` to safely destructure a state object into individual reactive getter functions.'}),
+        CodeBlock(`
+import { createState, getRefs } from 'atlas-web';
+
+const state = createState({ count: 0, active: true });
+const { count, active } = getRefs(state);
+
+// Call the destructured refs as functions to maintain reactivity
+Button({ 
+    textContent: () => \`Clicked \${count()} times\`,
+    disabled: () => !active()
+})
+`),
+
         H2({textContent: 'The Subscription Mechanism'}),
         P({},
             'Atlas uses an implicit "lazy subscription" tracking window. When you pass a function to a trait or a side-effect block, Atlas temporarily establishes an active listener context. If that function accesses any proxy properties, it automatically wires up granular updates.'
@@ -67,30 +94,4 @@ P({
         H3({textContent: 'Performance'}),
         P({textContent: 'Because subscriptions are granular, only the specific DOM nodes or effects that depend on a changed property are executed. There is no global re-render or VDOM diffing overhead.'})
     ),
-    H2({textContent: '5. Global State (Flows)'}),
-    P({textContent: 'For state that needs to be accessed across completely different parts of your application, Atlas provides a global registry via Flows.'}),
-    CodeBlock(`
-import { createFlow, getFlow } from 'atlas-web';
-
-// Initialize it once (e.g., in your main setup)
-createFlow('auth', { user: null, isAuthenticated: false });
-
-// Access it anywhere else in your app
-const authState = getFlow('auth');
-P({ textContent: () => authState.isAuthenticated ? 'Welcome back!' : 'Please log in.' })
-`),
-    H2({textContent: '6. Destructuring (getRefs)'}),
-    P({textContent: 'Standard destructuring breaks Proxy reactivity. Use `getRefs` to safely destructure a state object into individual reactive getter functions.'}),
-    CodeBlock(`
-import { createState, getRefs } from 'atlas-web';
-
-const state = createState({ count: 0, active: true });
-const { count, active } = getRefs(state);
-
-// Call the destructured refs as functions to maintain reactivity
-Button({ 
-    textContent: () => \`Clicked \${count()} times\`,
-    disabled: () => !active()
-})
-`),
 );
