@@ -1,4 +1,4 @@
-import { Section, H1, P, H2, Ul, Li, Strong, Div, Code } from 'atlas-web/dom';
+import {Section, H1, P, H2, Ul, Li, Strong, Div, Code, H3} from 'atlas-web/dom';
 import { Layout } from '../components/layout';
 import { CodeBlock } from '../components/code-elements';
 
@@ -19,6 +19,16 @@ P({
     textContent: () => state.loading ? 'Loading...' : \`Hello, \${state.data.login}\` 
 })
         `),
+        H3({ textContent: 'Custom Async Functions' }),
+        P({ textContent: "createFetch isn\\'t limited to URLs. You can pass any custom async function, making it perfect for wrapping third-party SDKs or complex data transformations." }),
+            CodeBlock(`
+import { createFetch } from 'atlas-web/query';
+
+const { state } = createFetch(async () => {
+    const res = await myCustomSDK.getData();
+    return res.transformedPayload;
+});
+`),
 
         H2({ textContent: 'Mutations: createMutation' }),
         P({ textContent: '`createMutation` is for server-side side effects (POST, PUT, DELETE). Unlike queries, mutations do not run automatically; they provide an `execute` function for manual triggering.' }),

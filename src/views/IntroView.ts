@@ -6,6 +6,8 @@ export const IntroView = () => Layout(
         H1({ textContent: '🌍 Atlas Web Framework' }),
         P({ textContent: 'Atlas is a lightweight, modular, and reactive TypeScript framework designed for building modern web applications with minimal overhead.' }),
         P({ textContent: 'The framework is divided into four specialized modules within the `atlas-web` package, allowing you to use only what you need.' }),
+        P({textContent : '(Ps : this doc is made using the Atlas Framework.)',
+           style : {opacity : '0.6', fontStyle : 'italic'}}),
 
         H2({ textContent: '📦 Four Pillars' }),
         Div({ className: 'feature-grid' },
