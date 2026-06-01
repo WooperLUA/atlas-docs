@@ -30,6 +30,12 @@ export const Layout = (...children: any[]) =>
             ]
         },
         {
+            title: 'Devtools (atlas-web/devtools)',
+            items: [
+                {path: '/devtools', text: 'Devtools'},
+            ]
+        },
+        {
             title: 'Reference',
             items: [
                 {path: '/api', text: 'API Reference'}

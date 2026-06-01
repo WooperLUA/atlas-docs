@@ -8,6 +8,7 @@ import { LifecycleView } from './views/LifecycleView';
 import { ApiView } from './views/ApiView';
 import { ErrorView } from './views/ErrorView';
 import { TestView } from './views/TestView';
+import {DevtoolsView} from "./views/DevtoolsView.ts";
 
 const routes = [
     { path: '/', view: IntroView },
@@ -16,6 +17,7 @@ const routes = [
     { path: '/routing', view: RoutingView },
     { path: '/query', view: QueryView },
     { path: '/lifecycle', view: LifecycleView },
+    { path: '/devtools', view: DevtoolsView },
     { path: '/api', view: ApiView },
     { path: '/test', view: TestView },
     { path: '*', view: ErrorView },
