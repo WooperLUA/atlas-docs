@@ -1,77 +1,95 @@
-import {Section, H1, P, H2, H3, Span} from 'atlas-web/dom';
-import {Layout} from '../components/layout';
-import {CodeBlock} from '../components/code-elements';
+import { Section, H1, P, H2, H3, Span, Div } from 'atlas-web/dom';
+import { Layout } from '../components/layout';
+import { CodeBlock } from '../components/code-elements';
 
 export const ReactivityView = () => Layout(
     Section({},
-        H1({textContent: '⚡ Core Reactivity (atlas)'}),
-        P({textContent: 'The core of Atlas is a high-performance reactivity engine that uses JavaScript Proxies to observe changes to state objects.'}),
+        H1({ textContent: '⚡ Core Reactivity (atlas)' }),
+        P({ textContent: 'The core of Atlas is a high-performance reactivity engine that uses JavaScript Proxies to observe changes to state objects with zero manual dependency tracking.' }),
 
-        H2({textContent: '1. createState'}),
-        P({textContent: 'To create a reactive state, simply wrap any object with `createState`. This returns a proxy that tracks property access and updates.'}),
+        H2({ textContent: '1. uState' }),
+        P({ textContent: 'To create a reactive state, wrap any object with `uState`. This returns a proxy that tracks property access and updates.' }),
         CodeBlock(`
-import { createState } from 'atlas-web';
+import { uState } from 'atlas-web';
 
-const state = createState({
+const state = uState({
     count: 0,
     user: { name: 'John' }
 });
         `),
 
-        H2({textContent: '2. createFormula'}),
-        P({textContent: 'Formulas represent derived state. They are read-only calculations that stay in sync with their source data.'}),
+        H2({ textContent: '2. uFormula' }),
+        P({ textContent: 'Formulas represent derived state. They are read-only calculations that automatically memoize their result and only recalculate when their tracked dependencies change.' }),
         CodeBlock(`
-import { createFormula } from 'atlas-web';
+import { uFormula } from 'atlas-web';
 
-const countSquared = createFormula(() => state.count * state.count);
+const countSquared = uFormula(() => state.count * state.count);
 
 Span({ textContent: () => \`Squared: \${countSquared()}\` })
         `),
-        P({textContent: 'Formulas are transparent: because they are functions, calling them inside a DOM trait automatically links that DOM node to the source state used in the calculation.'}),
+        P({ textContent: 'Because formulas are functions, calling them inside a DOM trait automatically links that DOM node to the source state used in the calculation.' }),
 
-        H2({textContent: '3. createEffect'}),
-        P({textContent: 'Effects are used for side-effects—actions that should happen automatically when state changes but don\'t necessarily return a UI element. Dependency tracking is completely automatic and requires no dependency arrays.'}),
+        H2({ textContent: '3. uEffect' }),
+        P({ textContent: 'Effects are used for side-effects. Dependency tracking is completely automatic. `uEffect` also returns a `dispose` function to manually clean up the effect and its dependencies.' }),
         CodeBlock(`
-import { createEffect } from 'atlas-web';
+import { uEffect } from 'atlas-web';
 
-createEffect(() => {
+const dispose = uEffect(() => {
     console.log(\`Count is now: \${state.count}\`);
     document.title = \`Count: \${state.count}\`;
-}); 
+});
+
+// Later, to stop listening and clean up:
+// dispose();
         `),
-        P({textContent: 'When an effect runs, it naturally listens to any reactive state properties read during execution.'}),
-
-        H2({textContent: '4. createArchive'}),
-        P({textContent: 'An Archive is a reactive state that persists across sessions. It automatically syncs its data to localStorage whenever a property is updated.'}),
+        H3({ textContent: 'Explicit Dependencies' }),
+        P({ textContent: 'If you want to disable implicit tracking and only listen to specific properties, pass getter functions as the second argument:' }),
         CodeBlock(`
-import { createArchive } from 'atlas-web';
+uEffect(
+    () => console.log('Only runs when count changes'), 
+    () => state.count // Explicit dependency
+);
+        `),
 
-const settings = createArchive('user-prefs', {
+        H2({ textContent: '4. uArchive (Singleton)' }),
+        P({ textContent: 'An Archive is a reactive state that persists across sessions. It acts as a singleton: provide an `initialState` on the first call to create and hydrate it, or call it with just the `key` anywhere else in your app to retrieve the existing instance.' }),
+        CodeBlock(`
+import { uArchive } from 'atlas-web';
+
+// File: settings.ts (Initialize once)
+export const settings = uArchive('user-prefs', {
     theme: 'dark',
     fontSize: 16
 });
 
-settings.theme = 'light';
+// File: header.ts (Retrieve anywhere)
+import { uArchive } from 'atlas-web';
+const settings = uArchive<{ theme: string, fontSize: number }>('user-prefs');
+
+settings.theme = 'light'; // Automatically syncs to localStorage
         `),
 
-        H2({textContent: '5. Global State (Flows)'}),
-        P({textContent: 'For state that needs to be accessed across completely different parts of your application, Atlas provides a global registry via Flows.'}),
+        H2({ textContent: '5. uFlow (Global State)' }),
+        P({ textContent: 'For state that needs to be accessed across completely different parts of your application without passing props, Atlas provides a global registry via Flows. Like `uArchive`, it acts as a singleton.' }),
         CodeBlock(`
-import { createFlow, getFlow } from 'atlas-web';
+import { uFlow } from 'atlas-web';
 
-// Initialize it once (e.g., in your main setup)
-createFlow('auth', { user: null, isAuthenticated: false });
+// File: auth.ts (Initialize once)
+export const auth = uFlow('auth', { user: null, isAuthenticated: false });
 
-// Access it anywhere else in your app
-const authState = getFlow('auth');
-P({ textContent: () => authState.isAuthenticated ? 'Welcome back!' : 'Please log in.' })
-`),
-        H2({textContent: '6. Destructuring (getRefs)'}),
-        P({textContent: 'Standard destructuring breaks Proxy reactivity. Use `getRefs` to safely destructure a state object into individual reactive getter functions.'}),
+// File: header.ts (Retrieve anywhere)
+import { uFlow } from 'atlas-web';
+const auth = uFlow<{ user: any, isAuthenticated: boolean }>('auth');
+
+P({ textContent: () => auth.isAuthenticated ? 'Welcome back!' : 'Please log in.' })
+        `),
+
+        H2({ textContent: '6. Destructuring (getRefs)' }),
+        P({ textContent: 'Standard JavaScript destructuring breaks Proxy reactivity. Use `getRefs` to safely destructure a state object into individual reactive getter functions.' }),
         CodeBlock(`
-import { createState, getRefs } from 'atlas-web';
+import { uState, getRefs } from 'atlas-web';
 
-const state = createState({ count: 0, active: true });
+const state = uState({ count: 0, active: true });
 const { count, active } = getRefs(state);
 
 // Call the destructured refs as functions to maintain reactivity
@@ -79,9 +97,9 @@ Button({
     textContent: () => \`Clicked \${count()} times\`,
     disabled: () => !active()
 })
-`),
+        `),
 
-        H2({textContent: 'The Subscription Mechanism'}),
+        H2({ textContent: 'The Subscription Mechanism' }),
         P({},
             'Atlas uses an implicit "lazy subscription" tracking window. When you pass a function to a trait or a side-effect block, Atlas temporarily establishes an active listener context. If that function accesses any proxy properties, it automatically wires up granular updates.'
         ),
@@ -91,7 +109,7 @@ P({
 });
         `),
 
-        H3({textContent: 'Performance'}),
-        P({textContent: 'Because subscriptions are granular, only the specific DOM nodes or effects that depend on a changed property are executed. There is no global re-render or VDOM diffing overhead.'})
-    ),
+        H3({ textContent: 'Performance' }),
+        P({ textContent: 'Because subscriptions are granular, only the specific DOM nodes or effects that depend on a changed property are executed. There is no global re-render or Virtual DOM diffing overhead.' })
+    )
 );
