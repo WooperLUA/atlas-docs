@@ -19,6 +19,18 @@ export const ApiView = () => Layout(
             P({ textContent: 'Creates a persistent side-effect. Returns a `dispose()` function for manual cleanup. Supports optional explicit dependency getters.' })
         ),
         Div({ className: 'api-item' },
+            Code({ textContent: 'uDebounceEffect(effect: () => void, delay: number): () => void' }),
+            P({ textContent: 'Creates a debounced side-effect. Tracks dependencies like a normal `uEffect`, but delays execution until dependencies have stopped changing for the specified delay (in ms). Returns a dispose function.' })
+        ),
+        Div({ className: 'api-item' },
+            Code({ textContent: 'uOnceEffect(effect: () => void): void' }),
+            P({ textContent: 'Runs an effect exactly one time. Automatically disposes of itself after the first successful execution.' })
+        ),
+        Div({ className: 'api-item' },
+            Code({ textContent: 'uWatchEffect<T>(getter: () => T, callback: (newVal: T, oldVal: T) => void): () => void' }),
+            P({ textContent: 'Watches a specific reactive getter. Only triggers the callback when the value changes, providing both old and new values.' })
+        ),
+        Div({ className: 'api-item' },
             Code({ textContent: 'uArchive<T>(key: string): T' }),
             Code({ textContent: 'uArchive<T>(key: string, initialState: T): T' }),
             P({ textContent: 'Singleton factory for localStorage-synced state. Provide `initialState` on first call to create/hydrate. Call with just `key` elsewhere to retrieve.' })

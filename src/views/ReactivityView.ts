@@ -51,16 +51,56 @@ uEffect(
 );
         `),
 
+        H3({ textContent: 'Utility Wrappers: uOnceEffect, uWatchEffect & uDebounceEffect' }),
+        P({ textContent: 'For specific side-effect patterns, Atlas provides tiny wrappers around `uEffect`:' }),
+        CodeBlock(`
+import {uState, uOnceEffect, uWatchEffect, uDebounceEffect } from 'atlas-web';
+
+// uOnce: Perfect for one-time initialization or analytics
+uOnceEffect(() => {
+    if (authState.isLoggedIn) {
+        fetchUserProfile(); // Only runs the very first time this becomes true
+    }
+});
+
+// uWatch: Perfect for comparing values or triggering specific transitions
+uWatchEffect(
+    () => routeState.currentPath,
+    (newPath, oldPath) => {
+        console.log(\`Navigated from \${oldPath} to \${newPath}\`);
+    }
+);
+
+// uDebounceEffect : Perfect for delaying effects
+const search = uState({ term: '', results: [] });
+
+// Only runs 500ms after the user stops typing.
+// If they type again before 500ms, the timer resets.
+uDebounceEffect(() => {
+    if (search.term.length > 2) {
+        console.log(\`Fetching results for: "\${search.term}"\`);
+        // fetch(\`/api/search?q=\${search.term}\`).then(...)
+    }
+}, 500);
+
+const SearchView = () => Input({
+    placeholder: 'Type to search...',
+    value: () => search.term,
+    onInput: (e) => search.term = (e.target as HTMLInputElement).value
+});
+
+`),
+
         H2({ textContent: '4. uArchive (Singleton)' }),
         P({ textContent: 'An Archive is a reactive state that persists across sessions. It acts as a singleton: provide an `initialState` on the first call to create and hydrate it, or call it with just the `key` anywhere else in your app to retrieve the existing instance.' }),
         CodeBlock(`
-import { uArchive } from 'atlas-web';
+import { uState, uArchive } from 'atlas-web';
 
 // File: settings.ts (Initialize once)
-export const settings = uArchive('user-prefs', {
+export const settings = uArchive('user-prefs', uState({
     theme: 'dark',
     fontSize: 16
-});
+}));
 
 // File: header.ts (Retrieve anywhere)
 import { uArchive } from 'atlas-web';
@@ -108,8 +148,5 @@ P({
     textContent: () => \`Count is: \${state.count}\` 
 });
         `),
-
-        H3({ textContent: 'Performance' }),
-        P({ textContent: 'Because subscriptions are granular, only the specific DOM nodes or effects that depend on a changed property are executed. There is no global re-render or Virtual DOM diffing overhead.' })
     )
 );
