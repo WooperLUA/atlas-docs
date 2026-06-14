@@ -19,7 +19,7 @@ export const ApiView = () => Layout(
             P({ textContent: 'Creates a persistent side-effect. Returns a `dispose()` function for manual cleanup. Supports optional explicit dependency getters.' })
         ),
         Div({ className: 'api-item' },
-            Code({ textContent: 'uDebounceEffect(effect: () => void, delay: number): () => void' }),
+            Code({ textContent: 'uDebounceEffect(effect: () => void, delay: number, dependencies?: (() => any) | (() => any)[]): () => void' }),
             P({ textContent: 'Creates a debounced side-effect. Tracks dependencies like a normal `uEffect`, but delays execution until dependencies have stopped changing for the specified delay (in ms). Returns a dispose function.' })
         ),
         Div({ className: 'api-item' },
@@ -32,8 +32,8 @@ export const ApiView = () => Layout(
         ),
         Div({ className: 'api-item' },
             Code({ textContent: 'uArchive<T>(key: string): T' }),
-            Code({ textContent: 'uArchive<T>(key: string, initialState: T): T' }),
-            P({ textContent: 'Singleton factory for localStorage-synced state. Provide `initialState` on first call to create/hydrate. Call with just `key` elsewhere to retrieve.' })
+            Code({ textContent: 'uArchive<T>(key: string, state: T): T' }),
+            P({ textContent: 'Singleton wrapper for localStorage-synced state. Provide a `uState` or `uFlow` on first call to create/hydrate. Call with just `key` elsewhere to retrieve.' })
         ),
         Div({ className: 'api-item' },
             Code({ textContent: 'uFlow<T>(name: string): T' }),

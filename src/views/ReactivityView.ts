@@ -83,6 +83,13 @@ uDebounceEffect(() => {
     }
 }, 500);
 
+uDebounceEffect(() => {
+    if (search.term.length > 2) {
+        console.log(\`Fetching results for: "\${search.term}"\`);
+        // fetch(\`/api/search?q=\${search.term}\`).then(...)
+    }
+}, 500, () => search.term); // Explicit dependencies tracking for sync tracking.
+
 const SearchView = () => Input({
     placeholder: 'Type to search...',
     value: () => search.term,
