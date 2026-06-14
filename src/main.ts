@@ -25,6 +25,8 @@ const routes = [
     { path: '*', view: ErrorView },
 ];
 
+//base path for githubpages
+
 new AtlasRouter({
     rootId: 'app',
     routes,
