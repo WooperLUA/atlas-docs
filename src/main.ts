@@ -10,6 +10,8 @@ import { ErrorView } from './views/ErrorView';
 import { TestView } from './views/TestView';
 import {DevtoolsView} from "./views/DevtoolsView.ts";
 
+import 'atlas-web/devtools'
+
 const routes = [
     { path: '/', view: IntroView },
     { path: '/reactivity', view: ReactivityView },
