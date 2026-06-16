@@ -19,16 +19,17 @@ const Header = () =>
     );
         `),
 
-        H2({textContent: 'Traits & Attributes'}),
-        P({textContent: 'The first argument is the "Traits" object. It handles attributes, styles, and events.'}),
+        H2({ textContent: 'AtlasTraits & Attributes' }),
+        P({ textContent: 'The first argument is the `AtlasTraits` object. It handles attributes, styles, lifecycle hooks, and events.' }),
         Ul({},
-            Li({}, Strong({textContent: 'Event Listeners:'}), ' Prefix with "on" (e.g., `onClick`, `onInput`).'),
-            Li({}, Strong({textContent: 'Dynamic Traits:'}), ' Pass a function returning a value to make the trait reactive.')
+            Li({}, Strong({ textContent: 'Native Events:' }), ' Use standard lowercase DOM event names (e.g., `onclick`, `oninput`, `onkeydown`).'),
+            Li({}, Strong({ textContent: 'Lifecycle Hooks:' }), ' Atlas-specific hooks like `onMount`, `onUnmount`, and `onUpdate`.'),
+            Li({}, Strong({ textContent: 'Dynamic Traits:' }), ' Pass a function returning a value to make the trait reactive.')
         ),
         CodeBlock(`
 Button({ 
     className: () => state.active ? 'btn-active' : 'btn',
-    onClick: () => state.active = !state.active,
+    onclick: () => state.active = !state.active, 
     textContent: 'Toggle'
 })
         `),

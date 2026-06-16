@@ -30,17 +30,25 @@ Span({ textContent: () => \`Squared: \${countSquared()}\` })
         P({ textContent: 'Because formulas are functions, calling them inside a DOM trait automatically links that DOM node to the source state used in the calculation.' }),
 
         H2({ textContent: '3. uEffect' }),
-        P({ textContent: 'Effects are used for side-effects. Dependency tracking is completely automatic. `uEffect` also returns a `dispose` function to manually clean up the effect and its dependencies.' }),
+        P({ textContent: 'Effects are used for side-effects. Dependency tracking is completely automatic. `uEffect` returns a `dispose` function for manual cleanup, but you can also simply return a cleanup function directly from the effect.' }),
         CodeBlock(`
 import { uEffect } from 'atlas-web';
 
+// The clean way: return a cleanup function
+uEffect(() => {
+    const id = setInterval(() => console.log(state.count), 1000);
+    
+    // This returned function automatically runs before the effect re-runs 
+    // or when the effect is manually disposed.
+    return () => clearInterval(id); 
+});
+
+// Manual disposal is still supported if needed
 const dispose = uEffect(() => {
-    console.log(\`Count is now: \${state.count}\`);
     document.title = \`Count: \${state.count}\`;
 });
 
-// Later, to stop listening and clean up:
-// dispose();
+// Later: dispose();
         `),
         H3({ textContent: 'Explicit Dependencies' }),
         P({ textContent: 'If you want to disable implicit tracking and only listen to specific properties, pass getter functions as the second argument:' }),

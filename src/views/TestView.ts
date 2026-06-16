@@ -26,6 +26,7 @@ export const TestView = () =>
         document.title = `Atlas: ${state.count}`;
     });
 
+
     return Layout(
         _Portal(H1({ textContent: 'Hello, World!' }), document.body),
 
@@ -48,7 +49,7 @@ export const TestView = () =>
                 Button({
                     style:       "width: 150px; height: 80px",
                     textContent: "Increment",
-                    onClick:     () => { state.count++; },
+                    onclick:     () => { state.count++; },
                 })
             )
         ),
@@ -74,7 +75,7 @@ export const TestView = () =>
             Button({
                 style: 'margin-top: 1rem; padding: 0.5rem 1rem; cursor: pointer;',
                 textContent: 'Refresh Profile',
-                onClick: () => refreshUser()
+                onclick: () => refreshUser()
             })
         )
     )

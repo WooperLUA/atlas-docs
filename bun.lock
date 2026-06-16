@@ -5,7 +5,7 @@
     "": {
       "name": "atlas-test",
       "dependencies": {
-        "atlas-web": "^2.12.0",
+        "atlas-web": "^2.13.1",
       },
       "devDependencies": {
         "typescript": "~6.0.2",
@@ -58,7 +58,7 @@
 
     "@tybys/wasm-util": ["@tybys/wasm-util@0.10.2", "", { "dependencies": { "tslib": "^2.4.0" } }, "sha512-RoBvJ2X0wuKlWFIjrwffGw1IqZHKQqzIchKaadZZfnNpsAYp2mM0h36JtPCjNDAHGgYez/15uMBpfGwchhiMgg=="],
 
-    "atlas-web": ["atlas-web@2.12.0", "", {}, "sha512-nNGRlIeimlTrjLmIVqnvYA4dpFJ+BI/MZyNooF+iFhPC5fgCRiqemLaMN0HuJ+qnDBGCeW4U9UO5DQ6ntBKRvg=="],
+    "atlas-web": ["atlas-web@2.13.1", "", {}, "sha512-Ri6c6hOaeOR1UVuK0kpZO22HX5BTwkM93TBwb4uENIVdtiVROlcq76vghdaNZ62ICVwEJP+R2cEO6K7nmuOFoA=="],
 
     "detect-libc": ["detect-libc@2.1.2", "", {}, "sha512-Btj2BOOO83o3WyH59e8MgXsxEQVcarkUOpEYrubB0urwnN10yQ364rsiByU11nZlqWYZm05i/of7io4mzihBtQ=="],
 

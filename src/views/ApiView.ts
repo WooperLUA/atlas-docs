@@ -47,8 +47,8 @@ export const ApiView = () => Layout(
 
         H2({ textContent: 'UI (atlas-web/dom)' }),
         Div({ className: 'api-item' },
-            Code({ textContent: 'Fragment(tag: string, traits: Traits, ...children: Children[]): AtlasNode' }),
-            P({ textContent: 'The foundational function for element creation.' })
+            Code({ textContent: 'Fragment(tag: string, traits: AtlasTraits, ...children: Children[]): AtlasNode' }),
+            P({ textContent: 'The foundational function for element creation. The `traits` object supports reactive bindings, native lowercase events (e.g., `onclick`), and Atlas lifecycle hooks (`onMount`, `onUnmount`).' })
         ),
         Div({ className: 'api-item' },
             Code({ textContent: 'Div, Span, H1, Button, ...' }),
