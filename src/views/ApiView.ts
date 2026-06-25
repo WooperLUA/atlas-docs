@@ -89,6 +89,11 @@ export const ApiView = () => Layout(
         Div({ className: 'api-item' },
             Code({ textContent: 'uMutation<T, V>(mutationFn: (variables: V) => Promise<T>): { state, execute }' }),
             P({ textContent: 'Reactive wrapper for manual asynchronous actions (POST, PUT, DELETE). Does not execute until `execute(vars)` is called.' })
-        )
+        ),
+
+        H2({ textContent: 'Form (atlas-web/form)' }),
+        Div({ className: 'api-item' },
+            Code({ textContent: 'uForm<T extends Record<string, any>>(definition: FormDefinition<T>): UFormInstance<T>' }),
+        ),
     )
 );

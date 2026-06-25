@@ -9,7 +9,7 @@ export const IntroView = () => Layout(
         P({textContent : '(Ps : this doc is made using the Atlas Framework.)',
            style : {opacity : '0.61', fontStyle : 'italic'}}),
 
-        H2({ textContent: '📦 Five Pillars' }),
+        H2({ textContent: '📦 Six Pillars' }),
         Div({ className: 'feature-grid' },
             Div({ className: 'feature-card' },
                 H3({ textContent: 'atlas-web' }),
@@ -26,6 +26,10 @@ export const IntroView = () => Layout(
             Div({ className: 'feature-card' },
                 H3({ textContent: 'atlas-web/query' }),
                 P({ textContent: 'A powerful data-fetching and caching utility. It manages remote resource states, revalidation, and loading/error states seamlessly.' })
+            ),
+            Div({ className: 'feature-card' },
+                H3({ textContent: 'atlas-web/form' }),
+                P({ textContent: 'A powerful wrapper to handle form.' })
             ),
             Div({ className: 'feature-card' },
                 H3({ textContent: 'atlas-web/devtools' }),

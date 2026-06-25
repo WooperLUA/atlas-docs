@@ -11,6 +11,7 @@ import { TestView } from './views/TestView';
 import {DevtoolsView} from "./views/DevtoolsView.ts";
 
 import 'atlas-web/devtools'
+import {FormView} from "./views/FormView.ts";
 
 const routes = [
     { path: '/', view: IntroView },
@@ -20,6 +21,7 @@ const routes = [
     { path: '/query', view: QueryView },
     { path: '/lifecycle', view: LifecycleView },
     { path: '/devtools', view: DevtoolsView },
+    { path: '/form', view: FormView },
     { path: '/api', view: ApiView },
     { path: '/test', view: TestView },
     { path: '*', view: ErrorView },

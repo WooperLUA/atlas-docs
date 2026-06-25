@@ -30,6 +30,12 @@ export const Layout = (...children: any[]) =>
             ]
         },
         {
+            title: 'Forms (atlas-web/form)',
+            items: [
+                { path: '/form', text: 'Form Management' },
+            ]
+        },
+        {
             title: 'Devtools (atlas-web/devtools)',
             items: [
                 {path: '/devtools', text: 'Devtools'},
